@@ -1,43 +1,38 @@
-# ✨NeuralCoref 4.0: Coreference Resolution in spaCy with Neural Networks.
+# GPU inference with `neuralcoref` ⚡
+*forked from [dirkgr/neuralcoref](https://github.com/dirkgr/neuralcoref)*
 
-NeuralCoref is a pipeline extension for spaCy 2.1+ which annotates and resolves coreference clusters using a neural network. NeuralCoref is production-ready, integrated in spaCy's NLP pipeline and extensible to new training datasets.
+![](https://img.shields.io/badge/license-MIT-green)
 
-For a brief introduction to coreference resolution and NeuralCoref, please refer to our [blog post](https://medium.com/huggingface/state-of-the-art-neural-coreference-resolution-for-chatbots-3302365dcf30).
+This is an implementation of SpaCy's `neuralcoref` coreference resolution pipeline extension, optimised for inference on GPU-enabled devices for faster processing. The vast majority of the codebase remains the same, however, *very minor* tweaks have been made to eliminate reliance on `numpy.zeros` (see: [neuralcoref/pr/149](https://github.com/huggingface/neuralcoref/pull/149)). All credit to [@dirkgr](https://github.com/dirkgr) and [@danielkingai2](https://github.com/danielkingai2)!
+
+### installation & setup
+```bash
+# venv for environment management
+venv .env
+source .env/bin/activate
+
+# conda for environment management
+conda create --name neuralcoref python=3.7
+conda activate neuralcoref
+
+git clone https://github.com/whispAI/neuralcoref-gpu.git
+cd neuralcoref
+pip install -r requirements.txt
+pip install -e .
+```
+
+‼️ **Note:** `neuralcoref` is _not_ compatible with SpaCy versions 3.X — this implementation has only been tested on SpaCy version 2.1.0.
+
+### about `neuralcoref`
+> NeuralCoref is a pipeline extension for spaCy 2.1+ which annotates and resolves coreference clusters using a neural network. NeuralCoref is production-ready, integrated in spaCy's NLP pipeline and extensible to new training datasets.
+> For a brief introduction to coreference resolution and NeuralCoref, please refer to our [blog post](https://medium.com/huggingface/state-of-the-art-neural-coreference-resolution-for-chatbots-3302365dcf30).
 NeuralCoref is written in Python/Cython and comes with a pre-trained statistical model for **English only**.
+> NeuralCoref is accompanied by a visualization client [NeuralCoref-Viz](https://github.com/huggingface/neuralcoref-viz), a web interface  powered by a REST server that can be [tried online](https://huggingface.co/coref/). NeuralCoref is released under the MIT license.
+*lifted from original neuralcoref README*
 
-NeuralCoref is accompanied by a visualization client [NeuralCoref-Viz](https://github.com/huggingface/neuralcoref-viz), a web interface  powered by a REST server that can be [tried online](https://huggingface.co/coref/). NeuralCoref is released under the MIT license.
+---
 
-✨ Version 4.0 out now! Available on pip and compatible with SpaCy 2.1+.
-
-[![Current Release Version](https://img.shields.io/github/release/huggingface/neuralcoref.svg?style=flat-square)](https://github.com/huggingface/neuralcoref/releases)
-[![spaCy](https://img.shields.io/badge/made%20with%20❤%20and-spaCy-09a3d5.svg)](https://spacy.io)
-[![Travis-CI](https://travis-ci.org/huggingface/neuralcoref.svg?branch=master)](https://travis-ci.org/huggingface/neuralcoref)
-[![NeuralCoref online Demo](https://huggingface.co/coref/assets/thumbnail-large.png)](https://huggingface.co/coref/)
-
-- **Operating system**: macOS / OS X · Linux · Windows (Cygwin, MinGW, Visual Studio)
-- **Python version**: Python 3.5+ (only 64 bit)
-- **Package managers**: [pip]
-
-## Install NeuralCoref
-
-### Install NeuralCoref with pip
-
-This is the easiest way to install NeuralCoref.
-
-```bash
-pip install neuralcoref
-```
-
-#### `spacy.strings.StringStore size changed` error
-
-If you have an error mentioning `spacy.strings.StringStore size changed, may indicate binary incompatibility` when loading NeuralCoref with `import neuralcoref`, it means you'll have to install NeuralCoref from the distribution's sources instead of the wheels to get NeuralCoref to build against the most recent version of SpaCy for your system.
-
-In this case, simply re-install neuralcoref as follows:
-
-```bash
-pip uninstall neuralcoref
-pip install neuralcoref --no-binary neuralcoref
-```
+## Pertinent Documentation from the original `neuralcoref` README
 
 #### Installing SpaCy's model
 
